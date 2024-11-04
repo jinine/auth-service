@@ -1,14 +1,15 @@
 import pool from '../util/db';
 import { User } from '../types/user';
+import { HashPassword } from '../util/hash';
 
 export const createUser = async (userData: Omit<User, 'id' | 'created_at' | 'updated_at'>): Promise<User> => {
     const { username, email, first_name, last_name, encrypted_pass, profile_picture_url } = userData;
-
+    let password = HashPassword(encrypted_pass);
     const result = await pool.query(
         `INSERT INTO users (username, email, first_name, last_name, encrypted_pass, profile_picture_url)
          VALUES ($1, $2, $3, $4, $5, $6)
          RETURNING *`,
-        [username, email, first_name, last_name, encrypted_pass, profile_picture_url]
+        [username, email, first_name, last_name, password, profile_picture_url]
     );
 
     return result.rows[0];
