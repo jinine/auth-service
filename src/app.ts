@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 import express from 'express';
 import cors from 'cors';
 import { Express } from 'express';
-import pool from './util/db';
+import healthCheck from './routes/healthCheck';
 
 
 dotenv.config();
@@ -14,15 +14,7 @@ app.set('query parser', 'simple');
 
 const port = process.env.PORT || 8991;
 console.log(process.env.DB_USER);
-app.get('/health', async (req, res) => {
-    try {
-        const result = await pool.query('SELECT NOW()');
-        res.json({ status: 'ok', timestamp: result.rows[0].now });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ status: 'error', message: 'Database connection failed' });
-    }
-});
+app.get('/health', healthCheck);
 
 
 // Start the server
