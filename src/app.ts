@@ -14,7 +14,18 @@ app.set('query parser', 'simple');
 
 const port = process.env.PORT || 8991;
 
+app.get('/health', async (req, res) => {
+    try {
+        const result = await pool.query('SELECT NOW()');
+        res.json({ status: 'ok', timestamp: result.rows[0].now });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ status: 'error', message: 'Database connection failed' });
+    }
+});
+
+
 // Start the server
 app.listen(port, () => {
     console.log(`Server started on port ${port}`);
-  });
+});
