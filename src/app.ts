@@ -12,9 +12,7 @@ const secretKey = crypto.randomBytes(64).toString("hex");
 dotenv.config();
 
 const app = express();
-app.use(cors({
-    origin: ['localhost:3000']
-}));
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(
