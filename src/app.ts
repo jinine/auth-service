@@ -3,8 +3,8 @@ import bodyParser from 'body-parser';
 import express from 'express';
 import cors from 'cors';
 import healthCheck from './routes/healthCheck';
-import { createUser } from './services/user';
-import { login } from './services/login';
+import { createUser } from './routes/user';
+import { login } from './routes/login';
 const crypto = require("crypto");
 const session = require("express-session");
 
