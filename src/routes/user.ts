@@ -68,3 +68,22 @@ export const get_user = async (req: any, res: any) => {
     return res.status(500).json({ message: "Internal server error." });
   }
 };
+
+export const update_password = async (req: any, res: any) => {
+  const { username, password } = req.body;
+  try {
+    const new_password = await hash_password(password);
+    await pool.query(
+      `UPDATE users
+       SET encrypted_pass = $1
+       WHERE username = $2
+       RETURNING *;
+      `,
+      [new_password, username]
+    );
+    return res.status(201).json({message: "password updated successfully."});
+  } catch (error) {
+    console.error("Update password error", error);
+    return res.status(500).json({ message: "Internal server error." });
+  }
+};

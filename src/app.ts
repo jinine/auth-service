@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 import express from 'express';
 import cors from 'cors';
 import health_check from './routes/health';
-import { create_user, get_user } from './routes/user';
+import { create_user, get_user, update_password } from './routes/user';
 import { login } from './routes/login';
 const crypto = require("crypto");
 const session = require("express-session");
@@ -30,7 +30,8 @@ app.get('/api/v1/health', health_check);
 
 //user routes
 app.post('/api/v1/user/create_user', create_user);
-app.post('/api/v1/user/get_user/', get_user);
+app.post('/api/v1/user/get_user', get_user);
+app.post('/api/v1/user/update_password', update_password);
 
 //auth routes
 app.post('/api/v1/auth/login', login);
