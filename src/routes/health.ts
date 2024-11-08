@@ -1,6 +1,6 @@
 import pool from '../util/db'
 
-const healthCheck = async (req: Request, res: any) => {
+const health_check = async (req: Request, res: any) => {
     try {
         const result = await pool.query('SELECT NOW()');
         res.json({ status: 'ok', timestamp: result.rows[0].now });
@@ -10,4 +10,4 @@ const healthCheck = async (req: Request, res: any) => {
     }
 }
 
-export default healthCheck;
+export default health_check;

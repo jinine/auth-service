@@ -28,4 +28,4 @@ COPY --from=build /usr/src/app/dist ./dist
 EXPOSE 8991
 CMD npm run start
 
-HEALTHCHECK --interval=30s --timeout=10s --retries=3 CMD curl -f http://localhost:8991/health || exit 1
+health_check --interval=30s --timeout=10s --retries=3 CMD curl -f http://localhost:8991/health || exit 1

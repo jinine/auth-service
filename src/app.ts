@@ -2,8 +2,8 @@ import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 import express from 'express';
 import cors from 'cors';
-import healthCheck from './routes/healthCheck';
-import { createUser } from './routes/user';
+import health_check from './routes/health';
+import { create_user, get_user } from './routes/user';
 import { login } from './routes/login';
 const crypto = require("crypto");
 const session = require("express-session");
@@ -23,14 +23,14 @@ app.use(
   })
 );
 
-
 //routes 
 
 //health check routes
-app.get('/api/v1/health', healthCheck);
+app.get('/api/v1/health', health_check);
 
 //user routes
-app.post('/api/v1/user/createuser', createUser);
+app.post('/api/v1/user/create_user', create_user);
+app.post('/api/v1/user/get_user/', get_user);
 
 //auth routes
 app.post('/api/v1/auth/login', login);
