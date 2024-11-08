@@ -1,5 +1,5 @@
 import pool from "../util/db";
-import { ComparePassword, HashPassword } from "../util/hash";
+import { ComparePassword } from "../util/hash";
 
 export const login = async (req: any, res: any) => {
   const { username, password } = req.body;

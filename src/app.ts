@@ -7,7 +7,7 @@ import { createUser } from './routes/user';
 import { login } from './routes/login';
 const crypto = require("crypto");
 const session = require("express-session");
-
+const port:any = process.env.PORT || 8991;
 const secretKey = crypto.randomBytes(64).toString("hex");
 dotenv.config();
 
@@ -23,7 +23,6 @@ app.use(
   })
 );
 
-const port = process.env.PORT || 8991;
 
 //routes 
 
@@ -37,6 +36,6 @@ app.post('/api/v1/user/createuser', createUser);
 app.post('/api/v1/auth/login', login);
 
 // Start the server
-app.listen(port, () => {
+app.listen(port, '0.0.0.0',  () => {
     console.log(`Server started on port ${port}`);
 });
